@@ -3,7 +3,7 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Modality, LiveServerContent } from '@google/genai';
 
 import { useLiveAPIContext } from '../../../contexts/LiveAPIContext';

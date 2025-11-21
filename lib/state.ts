@@ -22,7 +22,7 @@ const systemPrompts: Record<Template, string> = {
   'personal-assistant': 'You are a helpful and friendly personal assistant. Be proactive and efficient.',
   'navigation-system': 'You are a helpful and friendly navigation assistant. Provide clear and accurate directions.',
 };
-import { DEFAULT_LIVE_API_MODEL, DEFAULT_VOICE, LANGUAGES, VOICE_STYLES, SPEECH_PACES } from './constants';
+import { DEFAULT_LIVE_API_MODEL, DEFAULT_VOICE, LANGUAGES, VOICE_STYLES, SPEECH_PACES, LANGUAGE_INSTRUCTIONS } from './constants';
 import {
   FunctionResponse,
   FunctionResponseScheduling,
@@ -141,44 +141,6 @@ const CORE_SYSTEM_PROMPT = `You are a world-class Tech Investment Strategist and
 
 [final directive]
 Explain the users given topic like YOU are the one who created it or like you own it. Use a natural, confident human expressive way using the **selected Accent/Style** but use the **selected Language** to deliver it. Add humour (20%) but make sure to deliver the topic pitch like pitching to investors. It is not too salesy but it must give all the "why am I investing on that particular app or system or tech". Make it that all the listeners will rush to their bank or will send their investments once the Voice Agent finishes explaining it.`;
-
-// Language specific accent/mannerism directives
-const LANGUAGE_INSTRUCTIONS: Record<string, string> = {
-  'en-US': 'Speak in General American English. Rhotic, clear, standard US vocabulary. Use standard business idioms (leverage, circle back, ballpark).',
-  'en-GB': 'Speak in polished British English (RP). Use British spelling/vocab (lift, queue, colour) and mannerisms (quite, indeed, brilliant).',
-  'en-AU': 'Speak in General Australian English. Use Australian vocabulary/slang appropriately (mate, no worries, heap). Relaxed, upward inflection.',
-  'en-IN': 'Speak in professional Indian English. Clear syllable-timed rhythm. Use polite, formal phrasing typical of Indian business contexts.',
-  'tl-PH': 'Speak in "Taglish" (natural Manila-style Tagalog-English code-switching). Mix English technical terms with Tagalog grammar and particles (naman, nga, lang, talaga, diba).',
-  'nl-BE': 'Speak in native Belgian Flemish (Vlaams). Use Flemish colloquials (allez, amai, plezant, gij/u) and softer "g" sounds.',
-  'nl-NL': 'Speak in standard Netherlandic Dutch (ABN). Direct and clear. Use typical fillers (dus, zeg maar, eigenlijk). Harder "g" sounds.',
-  'es-ES': 'Speak in Peninsular (Castilian) Spanish. Use the "th" sound for c/z (distinción). Vocabulary: coche, ordenador, vale, vosotros.',
-  'es-MX': 'Speak in Mexican Spanish. Energetic intonation. Vocabulary: carro, computadora, ahorita. Use "ustedes" for plural you.',
-  'fr-FR': 'Speak in Metropolitan French. Use Parisian intonation. Fillers: euh, bah, du coup, bref. Natural liaison.',
-  'fr-CA': 'Speak in Quebec French (Québécois). Use distinct vowels and local vocabulary (char, souper, fin de semaine).',
-  'de-DE': 'Speak in Standard German (Hochdeutsch). Precise, structured, yet conversational. Use particles like "halt", "eben", "mal" naturally.',
-  'it-IT': 'Speak in Standard Italian. Expressive, rhythmic. Use gestures (implied in voice) and fillers like "allora", "cioè", "dunque".',
-  'pt-PT': 'Speak in European Portuguese. Closed vowels, distinct "sh" sounds at ends of words. Formal: Tu/Você distinction strictly European.',
-  'pt-BR': 'Speak in Brazilian Portuguese. Open vowels, musical rhythm (ginga). Use "Você" predominantly. Fillers: "né", "tá", "então".',
-  'ru-RU': 'Speak in modern Russian. Direct, expressive. Use rich intonation patterns.',
-  'ja-JP': 'Speak in natural Japanese. Use appropriate Keigo (Desu/Masu) for the context. Frequent Aizuchi (listening sounds).',
-  'ko-KR': 'Speak in standard Korean (Seoul dialect). Use polite endings (Yo/Nida).',
-  'zh-CN': 'Speak in Standard Mandarin (Putonghua). Clear tones. Use "erhua" sparingly unless Beijing-style is requested.',
-  'hi-IN': 'Speak in Hindi mixed with English technical terms (Hinglish). Use a natural, conversational tone common in Indian tech circles.',
-  'ar-SA': 'Speak in Modern Standard Arabic (MSA) or Gulf dialect (Khaleeji) if more natural for the context. Dignified and expressive.',
-  'tr-TR': 'Speak in Istanbul Turkish. Use vowel harmony strictly. Clear, melodious. Fillers: "şey", "yani".',
-  'vi-VN': 'Speak in Vietnamese (Hanoi or Saigon dialect depending on preference, standard Northern default). Tonal precision.',
-  'th-TH': 'Speak in Standard Thai. Polite particles (Khrap/Ka). Clear tones.',
-  'id-ID': 'Speak in Indonesian. Formal/Standard but conversational. No accents on vowels.',
-  'ms-MY': 'Speak in Malay (Bahasa Melayu). Standard formulation.',
-  'sv-SE': 'Speak in Standard Swedish. Melodic pitch accent.',
-  'no-NO': 'Speak in Standard Norwegian. Melodic.',
-  'da-DK': 'Speak in Danish. Soft consonants (Stød).',
-  'fi-FI': 'Speak in Finnish. Rhythmic, precise, vowel harmony.',
-  'pl-PL': 'Speak in Polish. Consonant-heavy, clear enunciation.',
-  'uk-UA': 'Speak in Ukrainian. Melodious, soft.',
-  'el-GR': 'Speak in Modern Greek. Rapid, clear vowels.',
-  'he-IL': 'Speak in Modern Hebrew. Direct, guttural r.'
-};
 
 const getFullPrompt = (languageCode: string, styleId: string, paceId: string) => {
   const langConfig = LANGUAGES.find(l => l.code === languageCode);
