@@ -1,0 +1,7 @@
+{
+  "name": "sspeaktoask",
+  "description": "Eburons Explainer Native",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
